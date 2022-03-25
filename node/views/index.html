@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Retro tool</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div>Hello world</div>
+        <label>Pick your game</label>
+        <select id="games" name="games">
+            <option value="starfish">Starfish</option>
+            <option value="sailboat">Sailboat</option>
+            <option value="5ls">5Ls</option>
+        </select>
+        <button type="submit" onclick="NewGameButtonClicked()">Host a new game</button>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+        function NewGameButtonClicked(){
+            $.ajax({
+            url:"/game/hostNew",
+            type:"POST",
+            data: JSON.stringify({game:$('#games').val()}),
+            contentType:"application/json; charset=utf-8",
+            success: function(result, status){
+                console.log(result);
+                $("body").html(result);
+            },
+            })
+        }
+        $(document).ready(function(){
+        });
+        </script>
+    </body>
+</html>
