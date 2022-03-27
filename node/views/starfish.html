@@ -1,9 +1,22 @@
 <body>
     <div>Starfish</div>
-    <label id="gameCode">Pick your game</label>
+    <label id="gameBuzzword">Buzzword here</label>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
+    function requestNewBuzzword(){
+        $.ajax({
+            url:"/game/requestBuzzword",
+            type:"POST",
+            data: JSON.stringify({game: 'starfish'}),
+            contentType:"application/json; charset=utf-8",
+            success: function(result, status){
+                console.log(result);
+                $("#gameBuzzword").text('Your buzzword is: ' + result.buzzword);
+            },
+            })
+    }
     $(document).ready(function(){
+        requestNewBuzzword();
     });
     </script>
 </body>
