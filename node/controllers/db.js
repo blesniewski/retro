@@ -49,7 +49,7 @@ exports.getBuzzword = async function(word, callback){
         callback(word, false);
     }
     else if (buzzword.taken){
-        callback(word, true)
+        callback(word, true, buzzword.game)
     }
 }
 

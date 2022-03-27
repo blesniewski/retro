@@ -16,8 +16,8 @@ exports.getNewBuzzword=function(req, res){
 }
 exports.joinWithBuzzword=function(req, res){
     console.log("Request to join with a buzzword: ", req.body.buzzword);
-    dbController.getBuzzword(req.body.buzzword, function(buzzword, isOk){
-        res.send({buzzword: buzzword, valid: isOk});
+    dbController.getBuzzword(req.body.buzzword, function(buzzword, isOk, game){
+        res.send({buzzword: buzzword, valid: isOk, game: game});
     });
 }
 //TODO: buzzword invalidation
