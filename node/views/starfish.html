@@ -39,6 +39,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./scripts/cookies.js"></script>
     <script>
+        function refreshCategory(category) {
+            $.ajax({
+                url: "/game/getCategoryEntries",
+                type: "POST",
+                data: JSON.stringify({ buzzword: getCookie('buzzword'), category: category }),
+                contentType: "application/json; charset=utf-8",
+                success: function (result, status) {
+                    console.log(result.type);
+                    $("#" + category + 'List').empty();
+                    result.forEach(element => {
+                        console.log("Element")
+                        $("#" + category + 'List').append('<li id="' + element.id + '">' + element.contents + '</li>');
+                    });
+                },
+            })
+        }
+
         function newEntryBtnClicked(category, contents) {
             $.ajax({
                 url: "/game/newEntry",
@@ -47,7 +64,8 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status) {
                     console.log(result);
-                    //TODO: on success, request refresh of entries
+                    $('#' + category + 'Input').val('');
+                    refreshCategory(result.category);
                 },
             })
         }
@@ -87,6 +105,13 @@
             } else {
                 $("#gameBuzzword").text('Your buzzword is: ' + buzzword);
             }
+            setInterval(function () {
+                refreshCategory('stopDoing');
+                refreshCategory('lessOf');
+                refreshCategory('keepDoing');
+                refreshCategory('moreOf');
+                refreshCategory('startDoing');
+            }, 500);
         });
     //TODO: allow owner do destroy game
     </script>

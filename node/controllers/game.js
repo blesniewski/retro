@@ -27,4 +27,11 @@ exports.newEntry = function (req, res) {
             res.send({ category: category });
         });
 }
+exports.getEntriesForCategory = function (req, res) {
+    console.log("Getting entries for category ", req.body.category, " and game ", req.body.buzzword);
+    dbController.getGameEntriesByCategory(req.body.buzzword, req.body.category, function (entries) {
+        console.log(entries);
+        res.send(entries);
+    })
+}
 //TODO: buzzword invalidation

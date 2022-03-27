@@ -47,6 +47,30 @@ exports.addEntry = async function (author, buzzword, category, contents, callbac
     callback(category);
 }
 
+exports.getGameEntriesByCategory = async function (buzzword, category, callback) {
+    await mongoose.connect(dbUrl + '/' + dbName);
+    const Entry = mongoose.model('Entry', entrySchema, 'entries');
+
+    var simlpeEntries = [];
+    Entry.find({ buzzword: buzzword, category: category },
+        function (err, entries) {
+            if (err) {
+                console.log("ERR: ", err);
+                return;
+            }
+            console.log("Found entries: ", entries.length);
+            entries.forEach(entry => {
+                simlpeEntries.push({
+                    id: entry.id,
+                    author: entry.author,
+                    buzzword: entry.buzzword,
+                    contents: entry.contents
+                })
+            })
+            callback(simlpeEntries);
+        });
+}
+
 exports.populateBuzzwords = async function () {
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
