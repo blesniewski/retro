@@ -10,17 +10,46 @@ const buzzwordSchema = new mongoose.Schema({
     game: String
 });
 
+const entrySchema = new mongoose.Schema({
+    author: String,
+    buzzword: String,
+    category: String,
+    contents: String
+});
+
 //TODO: add entry schema
 const dbUrl = 'mongodb://127.0.0.1:27017'
 const dbName = 'retro'
 
+exports.clearEntries = async function () {
+    await mongoose.connect(dbUrl + '/' + dbName)
+    const Entry = mongoose.model('Entry', entrySchema, 'entries');
+
+    Entry.deleteMany({}, function (err) {
+        console.log("Removed old entries");
+    });
+}
+exports.clearBuzzwords = async function () {
+    await mongoose.connect(dbUrl + '/' + dbName)
+    const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
+
+    Buzzword.deleteMany({}, function (err) {
+        console.log("Removed old buzzwords");
+    });
+}
+
+exports.addEntry = async function (author, buzzword, category, contents, callback) {
+    await mongoose.connect(dbUrl + '/' + dbName);
+    const Entry = mongoose.model('Entry', entrySchema, 'entries');
+
+    const newEntry = new Entry({ contents: contents, category: category, author: author, buzzword: buzzword });
+    newEntry.save();
+    callback(category);
+}
+
 exports.populateBuzzwords = async function () {
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
-    // if the db is already populated, first remove old entries
-    Buzzword.deleteMany({}, function (err) {
-        console.log("Removed old entries");
-    });
 
     // populate db with buzzwords:
     const buzzwords = ['cloud', 'ai', 'edge', 'hardware', 'release', 'success', 'win', 'note', 'mesh', 'sky', 'sun', 'interface']

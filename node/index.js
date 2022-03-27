@@ -15,6 +15,8 @@ app.use('/game', gameRouter);
 
 
 var listener = app.listen(8081, function () {
-    console.log('Listening on port ' + listener.address().port)
+    console.log('Listening on port ' + listener.address().port);
+    dbController.clearBuzzwords();
+    dbController.clearEntries();
     dbController.populateBuzzwords();
 });

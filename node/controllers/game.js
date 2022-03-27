@@ -20,4 +20,11 @@ exports.joinWithBuzzword = function (req, res) {
         res.send({ buzzword: buzzword, valid: isOk, game: game });
     });
 }
+exports.newEntry = function (req, res) {
+    console.log("Post request for a new entry. Buzzword: ", req.body.buzzword, " Category: ", req.body.category, " Contents: ", req.body.contents, " Author: ", req.body.user);
+    dbController.addEntry(req.body.user, req.body.buzzword, req.body.category, req.body.contents,
+        function (category) {
+            res.send({ category: category });
+        });
+}
 //TODO: buzzword invalidation

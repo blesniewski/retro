@@ -1,9 +1,72 @@
 <body>
     <div>Starfish</div>
     <label id="gameBuzzword">Buzzword here</label>
+    <div id="stopDoingDiv">
+        <label id="stopDoingLabel">Stop doing</label>
+        <ul id="stopDoingList">
+        </ul>
+        <input type="text" id="stopDoingInput">
+        <button type="submit" onclick="stopDoingBtnClicked()">Send</button>
+    </div>
+    <div id="lessOfDiv">
+        <label id="lessOfLabel">Less of</label>
+        <ul id="lessOfList">
+        </ul>
+        <input type="text" id="lessOfInput">
+        <button type="submit" onclick="lessOfBtnClicked()">Send</button>
+    </div>
+    <div id="keepDoingDiv">
+        <label id="keepDoingLabel">Keep doing</label>
+        <ul id="keepDoingList">
+        </ul>
+        <input type="text" id="keepDoingInput">
+        <button type="submit" onclick="keepDoingBtnClicked()">Send</button>
+    </div>
+    <div id="moreOfDiv">
+        <label id="moreOfLabel">More of</label>
+        <ul id="moreOfList">
+        </ul>
+        <input type="text" id="moreOfInput">
+        <button type="submit" onclick="moreOfBtnClicked()">Send</button>
+    </div>
+    <div id="startDoingDiv">
+        <label id="startDoingLabel">Start doing</label>
+        <ul id="startDoingList">
+        </ul>
+        <input type="text" id="startDoingInput">
+        <button type="submit" onclick="startDoingBtnClicked()">Send</button>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./scripts/cookies.js"></script>
     <script>
+        function newEntryBtnClicked(category, contents) {
+            $.ajax({
+                url: "/game/newEntry",
+                type: "POST",
+                data: JSON.stringify({ buzzword: getCookie('buzzword'), category: category, contents: contents, user: getCookie('userid') }),
+                contentType: "application/json; charset=utf-8",
+                success: function (result, status) {
+                    console.log(result);
+                    //TODO: on success, request refresh of entries
+                },
+            })
+        }
+
+        function stopDoingBtnClicked() {
+            newEntryBtnClicked("stopDoing", $("#stopDoingInput").val());
+        }
+        function lessOfBtnClicked() {
+            newEntryBtnClicked("lessOf", $("#lessOfInput").val());
+        }
+        function keepDoingBtnClicked() {
+            newEntryBtnClicked("keepDoing", $("#keepDoingInput").val());
+        }
+        function moreOfBtnClicked() {
+            newEntryBtnClicked("moreOf", $("#moreOfInput").val());
+        }
+        function startDoingBtnClicked() {
+            newEntryBtnClicked("startDoing", $("#startDoingInput").val());
+        }
         function requestNewBuzzword() {
             $.ajax({
                 url: "/game/requestBuzzword",

@@ -5,5 +5,6 @@ var gameController = require('../controllers/game');
 router.post('/new', gameController.hostNew);
 router.post('/requestBuzzword', gameController.getNewBuzzword);
 router.post('/join', gameController.joinWithBuzzword);
+router.post('/newEntry', gameController.newEntry);
 
 module.exports = router;
