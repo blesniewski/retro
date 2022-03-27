@@ -36,9 +36,24 @@
         <input type="text" id="startDoingInput">
         <button type="submit" onclick="startDoingBtnClicked()">Send</button>
     </div>
+    <div id="endGameDiv">
+        <label id="endGameLabel">You can end your game here:</label>
+        <button type="submit" onclick="endGameBtnClicked()">End!</button>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./scripts/cookies.js"></script>
     <script>
+        function endGameBtnClicked() {
+            $.ajax({
+                url: "/game/endGame",
+                type: "POST",
+                data: JSON.stringify({ buzzword: getCookie('buzzword'), user: getCookie('userid') }),
+                contentType: "application/json; charset=utf-8",
+                success: function (result, status) {
+                    console.log(result);
+                },
+            })
+        }
         function refreshCategory(category) {
             $.ajax({
                 url: "/game/getCategoryEntries",
@@ -102,8 +117,13 @@
             var buzzword = getCookie("buzzword")
             if (buzzword == "") {
                 requestNewBuzzword();
+                setCookie("isOwner", true, 1);
             } else {
                 $("#gameBuzzword").text('Your buzzword is: ' + buzzword);
+            }
+            $('#endGameDiv').hide();
+            if (getCookie("isOwner") == 'true') {
+                $('#endGameDiv').show();
             }
             setInterval(function () {
                 refreshCategory('stopDoing');

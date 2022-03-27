@@ -53,6 +53,7 @@
                             contentType: "application/json; charset=utf-8",
                             success: function (result, status) {
                                 console.log(result);
+                                setCookie("isOwner", false, 1);
                                 $("body").html(result);
                             },
                         });

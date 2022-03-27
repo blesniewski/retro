@@ -25,7 +25,10 @@ exports.clearEntries = async function () {
     const Entry = mongoose.model('Entry', entrySchema, 'entries');
 
     Entry.deleteMany({}, function (err) {
-        console.log("Removed old entries");
+        //console.log("Removed old entries");
+        if (err) {
+            console.log(err);
+        }
     });
 }
 exports.clearBuzzwords = async function () {
@@ -33,7 +36,10 @@ exports.clearBuzzwords = async function () {
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
 
     Buzzword.deleteMany({}, function (err) {
-        console.log("Removed old buzzwords");
+        //console.log("Removed old buzzwords");
+        if (err) {
+            console.log(err);
+        }
     });
 }
 
@@ -57,7 +63,7 @@ exports.getGameEntriesByCategory = async function (buzzword, category, callback)
                 console.log("ERR: ", err);
                 return;
             }
-            console.log("Found entries: ", entries.length);
+            //console.log("Found entries: ", entries.length);
             entries.forEach(entry => {
                 simlpeEntries.push({
                     id: entry.id,
@@ -81,22 +87,13 @@ exports.populateBuzzwords = async function () {
         await buzzword.save();
     })
 }
-
-exports.getBuzzwords = async function () {
-    await mongoose.connect(dbUrl + '/' + dbName)
-    const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
-
-    var populated = await Buzzword.find();
-    console.log(populated)
-}
-
 exports.getBuzzword = async function (word, callback) {
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
 
     var buzzword = await Buzzword.findOne({ buzzword: word });
 
-    console.log('Checking the status for buzzword: ', word);
+    //console.log('Checking the status for buzzword: ', word);
     if (buzzword == null) {
         callback(word, false);
     }
@@ -111,12 +108,12 @@ exports.getNewBuzzword = async function (game, user, callback) {
 
     var buzzwords = await Buzzword.find({ taken: false });
     const randomIndex = Math.floor(Math.random() * buzzwords.length);
-    console.log('New buzzword picked with index: ', randomIndex, ': ', buzzwords[randomIndex]);
+    //console.log('New buzzword picked with index: ', randomIndex, ': ', buzzwords[randomIndex]);
     var pickedBuzzword = buzzwords[randomIndex].buzzword;
     callback(pickedBuzzword);
 
     // updating the buzzword entry (locking it up) - set current date with added timeout
-    console.log(Buzzword.find({ buzzword: pickedBuzzword }));
+    //console.log(Buzzword.find({ buzzword: pickedBuzzword }));
     var expiry = moment()
     expiry.add(30, 'h'); //TODO: set this timeout to something like 6h for production
     Buzzword.findOneAndUpdate({ buzzword: pickedBuzzword }, { buzzword: pickedBuzzword, taken: true, expiryDate: expiry, ownerUser: user, game: game }, { new: true, timestamps: false },
@@ -128,6 +125,34 @@ exports.getNewBuzzword = async function (game, user, callback) {
             }
         });
 }
+exports.invalidateBuzzword = async function (user, buzzword, callback) {
+    await mongoose.connect(dbUrl + '/' + dbName)
+    const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
+    const Entry = mongoose.model('Entry', entrySchema, 'entries');
+
+    var findBuzzword = await Buzzword.findOne({ buzzword: buzzword });
+    if (findBuzzword.ownerUser != user) {
+        callback(false);
+        return;
+    }
+    console.log("user confirmed to be owner")
+    Buzzword.findOneAndUpdate({ buzzword: buzzword }, { taken: false, ownerUser: '' }, {},
+        function (err, doc) {
+            if (err) {
+                console.log("ERR: ", err);
+            }
+            console.log("query callback run, trying to find buzzword: ", buzzword, " From user: ", user);
+            if (doc != null) {
+                console.log('Cleaning the DB: updated: ', doc.buzzword);
+                Entry.deleteMany({ buzzword: doc.buzzword }, function (err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+    callback(true);
+}
 
 setInterval(async function () {
     await mongoose.connect(dbUrl + '/' + dbName)
@@ -138,7 +163,7 @@ setInterval(async function () {
     Buzzword.findOneAndUpdate({ taken: true, expiryDate: { $lte: now } }, { taken: false, ownerUser: '' }, {},
         function (err, doc) {
             if (doc != null) {
-                console.log('Cleaning the DB: updated: ', doc.buzzword);
+                //console.log('Cleaning the DB: updated: ', doc.buzzword);
                 Entry.deleteMany({ buzzword: doc.buzzword }, function (err) {
                     if (err) {
                         console.log(err);
