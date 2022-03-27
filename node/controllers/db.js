@@ -5,7 +5,9 @@ const moment = require('moment');
 const buzzwordSchema = new mongoose.Schema({
     buzzword: String,
     taken: Boolean,
-    expiryDate: Date
+    expiryDate: Date,
+    ownerUser: String,
+    game: String
 });
 
 //TODO: add entry schema
@@ -36,7 +38,22 @@ exports.getBuzzwords = async function(){
     console.log(populated)
 }
 
-exports.getNewBuzzword = async function(callback){
+exports.getBuzzword = async function(word, callback){
+    await mongoose.connect(dbUrl + '/' + dbName)
+    const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
+
+    var buzzword = await Buzzword.findOne({buzzword: word});
+
+    console.log('Checking the status for buzzword: ', word);
+    if (buzzword == null){
+        callback(word, false);
+    }
+    else if (buzzword.taken){
+        callback(word, true)
+    }
+}
+
+exports.getNewBuzzword = async function(game, user, callback){
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
 
@@ -46,11 +63,11 @@ exports.getNewBuzzword = async function(callback){
     var pickedBuzzword = buzzwords[randomIndex].buzzword;
     callback(pickedBuzzword);
 
-    // updating the buzzword entry (locking it up)
+    // updating the buzzword entry (locking it up) - set current date with added timeout
     console.log(Buzzword.find({buzzword: pickedBuzzword}));
     var expiry = moment()
-    expiry.add(15, 's');
-    Buzzword.findOneAndUpdate({buzzword: pickedBuzzword}, {buzzword: pickedBuzzword, taken: true, expiryDate: expiry}, { new: true, timestamps: false},
+    expiry.add(15, 'm'); //TODO: set this timeout to something like 6h for production
+    Buzzword.findOneAndUpdate({buzzword: pickedBuzzword}, {buzzword: pickedBuzzword, taken: true, expiryDate: expiry, ownerUser: user, game: game}, { new: true, timestamps: false},
         function(err, updated){
             if(err){
                 console.log(err);
@@ -71,5 +88,5 @@ setInterval(async function() {
             }
     });
     //TODO: also clean the entries
-}, 1*1000)
+}, 1*1000) //TODO: set this timeout to run every minute for production
 // format for the interval would be minutes * seconds * miliseconds

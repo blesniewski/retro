@@ -10,8 +10,14 @@ exports.hostNew=function(req, res){
 }
 exports.getNewBuzzword=function(req, res){
     console.log("Request for a new Buzzword for a game: " + req.body.game);
-    dbController.getNewBuzzword(function(buzzword){
+    dbController.getNewBuzzword(req.body.game, req.body.user, function(buzzword){
         res.send({buzzword: buzzword});
     });
 }
-//TODO: make it possible to join with a buzzword
+exports.joinWithBuzzword=function(req, res){
+    console.log("Request to join with a buzzword: ", req.body.buzzword);
+    dbController.getBuzzword(req.body.buzzword, function(buzzword, isOk){
+        res.send({buzzword: buzzword, valid: isOk});
+    });
+}
+//TODO: buzzword invalidation

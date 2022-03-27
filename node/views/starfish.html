@@ -2,21 +2,28 @@
     <div>Starfish</div>
     <label id="gameBuzzword">Buzzword here</label>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./scripts/cookies.js"></script>
     <script>
     function requestNewBuzzword(){
         $.ajax({
             url:"/game/requestBuzzword",
             type:"POST",
-            data: JSON.stringify({game: 'starfish'}),
+            data: JSON.stringify({game: 'starfish', user: getCookie('userid')}),
             contentType:"application/json; charset=utf-8",
             success: function(result, status){
                 console.log(result);
                 $("#gameBuzzword").text('Your buzzword is: ' + result.buzzword);
+                setCookie("buzzword", result.buzzword, 1)
             },
             })
     }
     $(document).ready(function(){
-        requestNewBuzzword();
+        var buzzword = getCookie("buzzword")
+        if (buzzword == ""){
+            requestNewBuzzword();
+        } else {
+            $("#gameBuzzword").text('Your buzzword is: ' + buzzword);
+        }
     });
     </script>
 </body>
