@@ -14,23 +14,23 @@ const buzzwordSchema = new mongoose.Schema({
 const dbUrl = 'mongodb://127.0.0.1:27017'
 const dbName = 'retro'
 
-exports.populateBuzzwords= async function(){
+exports.populateBuzzwords = async function () {
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
     // if the db is already populated, first remove old entries
-    Buzzword.deleteMany({}, function(err){
+    Buzzword.deleteMany({}, function (err) {
         console.log("Removed old entries");
     });
 
     // populate db with buzzwords:
-    const buzzwords = [ 'cloud', 'ai', 'edge', 'hardware', 'release', 'success', 'win', 'note', 'mesh', 'sky', 'sun', 'interface']
-    buzzwords.forEach(async function(word, _, _){
-        const buzzword = new Buzzword({buzzword: word, taken: false},{timestamps:false});
+    const buzzwords = ['cloud', 'ai', 'edge', 'hardware', 'release', 'success', 'win', 'note', 'mesh', 'sky', 'sun', 'interface']
+    buzzwords.forEach(async function (word, _, _) {
+        const buzzword = new Buzzword({ buzzword: word, taken: false }, { timestamps: false });
         await buzzword.save();
     })
 }
 
-exports.getBuzzwords = async function(){
+exports.getBuzzwords = async function () {
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
 
@@ -38,55 +38,55 @@ exports.getBuzzwords = async function(){
     console.log(populated)
 }
 
-exports.getBuzzword = async function(word, callback){
+exports.getBuzzword = async function (word, callback) {
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
 
-    var buzzword = await Buzzword.findOne({buzzword: word});
+    var buzzword = await Buzzword.findOne({ buzzword: word });
 
     console.log('Checking the status for buzzword: ', word);
-    if (buzzword == null){
+    if (buzzword == null) {
         callback(word, false);
     }
-    else if (buzzword.taken){
+    else if (buzzword.taken) {
         callback(word, true, buzzword.game)
     }
 }
 
-exports.getNewBuzzword = async function(game, user, callback){
+exports.getNewBuzzword = async function (game, user, callback) {
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
 
-    var buzzwords = await Buzzword.find({taken: false});
+    var buzzwords = await Buzzword.find({ taken: false });
     const randomIndex = Math.floor(Math.random() * buzzwords.length);
     console.log('New buzzword picked with index: ', randomIndex, ': ', buzzwords[randomIndex]);
     var pickedBuzzword = buzzwords[randomIndex].buzzword;
     callback(pickedBuzzword);
 
     // updating the buzzword entry (locking it up) - set current date with added timeout
-    console.log(Buzzword.find({buzzword: pickedBuzzword}));
+    console.log(Buzzword.find({ buzzword: pickedBuzzword }));
     var expiry = moment()
     expiry.add(15, 'm'); //TODO: set this timeout to something like 6h for production
-    Buzzword.findOneAndUpdate({buzzword: pickedBuzzword}, {buzzword: pickedBuzzword, taken: true, expiryDate: expiry, ownerUser: user, game: game}, { new: true, timestamps: false},
-        function(err, updated){
-            if(err){
+    Buzzword.findOneAndUpdate({ buzzword: pickedBuzzword }, { buzzword: pickedBuzzword, taken: true, expiryDate: expiry, ownerUser: user, game: game }, { new: true, timestamps: false },
+        function (err, updated) {
+            if (err) {
                 console.log(err);
             } else {
                 console.log(updated);
             }
-    });
+        });
 }
 
-setInterval(async function() {
+setInterval(async function () {
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
     var now = moment();
-    Buzzword.findOneAndUpdate({taken: true, expiryDate: {$lte: now}}, {taken: false}, {},
-        function(err, doc) { 
-            if (doc != null){
+    Buzzword.findOneAndUpdate({ taken: true, expiryDate: { $lte: now } }, { taken: false }, {},
+        function (err, doc) {
+            if (doc != null) {
                 console.log('Cleaning the DB: updated: ', doc.buzzword)
             }
-    });
+        });
     //TODO: also clean the entries
-}, 1*1000) //TODO: set this timeout to run every minute for production
+}, 1 * 1000) //TODO: set this timeout to run every minute for production
 // format for the interval would be minutes * seconds * miliseconds

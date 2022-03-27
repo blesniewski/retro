@@ -4,26 +4,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./scripts/cookies.js"></script>
     <script>
-    function requestNewBuzzword(){
-        $.ajax({
-            url:"/game/requestBuzzword",
-            type:"POST",
-            data: JSON.stringify({game: 'starfish', user: getCookie('userid')}),
-            contentType:"application/json; charset=utf-8",
-            success: function(result, status){
-                console.log(result);
-                $("#gameBuzzword").text('Your buzzword is: ' + result.buzzword);
-                setCookie("buzzword", result.buzzword, 1)
-            },
+        function requestNewBuzzword() {
+            $.ajax({
+                url: "/game/requestBuzzword",
+                type: "POST",
+                data: JSON.stringify({ game: 'starfish', user: getCookie('userid') }),
+                contentType: "application/json; charset=utf-8",
+                success: function (result, status) {
+                    console.log(result);
+                    $("#gameBuzzword").text('Your buzzword is: ' + result.buzzword);
+                    setCookie("buzzword", result.buzzword, 1)
+                },
             })
-    }
-    $(document).ready(function(){
-        var buzzword = getCookie("buzzword")
-        if (buzzword == ""){
-            requestNewBuzzword();
-        } else {
-            $("#gameBuzzword").text('Your buzzword is: ' + buzzword);
         }
-    });
+        $(document).ready(function () {
+            var buzzword = getCookie("buzzword")
+            if (buzzword == "") {
+                requestNewBuzzword();
+            } else {
+                $("#gameBuzzword").text('Your buzzword is: ' + buzzword);
+            }
+        });
+    //TODO: allow owner do destroy game
     </script>
 </body>

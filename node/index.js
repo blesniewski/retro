@@ -9,13 +9,12 @@ const app = express();
 var path = require('path')
 app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.json());
-// app.all('/calcSubnetInfo', subnetCalcRouter);
-// app.all('/justlisten', youtubeRouter);
+
 app.use('/', indexRouter);
 app.use('/game', gameRouter);
 
 
-var listener = app.listen(8081, function(){
-    console.log('Listening on port ' +listener.address().port)
+var listener = app.listen(8081, function () {
+    console.log('Listening on port ' + listener.address().port)
     dbController.populateBuzzwords();
 });

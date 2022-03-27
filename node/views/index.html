@@ -1,72 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Retro tool</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    </head>
-    <body>
-        <div>Hello world</div>
-        <label>Pick your game</label>
-        <select id="games" name="games">
-            <option value="starfish">Starfish</option>
-            <option value="sailboat">Sailboat</option>
-            <option value="5ls">5Ls</option>
-        </select>
-        <button type="submit" onclick="NewGameButtonClicked()">Host a new game</button>
+
+<head>
+    <title>Retro tool</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div>Hello world</div>
+    <label>Pick your game</label>
+    <select id="games" name="games">
+        <option value="starfish">Starfish</option>
+        <option value="sailboat">Sailboat</option>
+        <option value="5ls">5Ls</option>
+    </select>
+    <button type="submit" onclick="NewGameButtonClicked()">Host a new game</button>
     </br>
-        <label>Or join with a code!</label>
-        <input type="text" id="userBuzzword">
-        <button type="submit" onclick="JoinWithBuzzwordButtonClicked()">Join!</button>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="scripts/cookies.js"></script>
-        <script src="scripts/utils.js"></script>
-        <script>
-        function NewGameButtonClicked(){
+    <label>Or join with a code!</label>
+    <input type="text" id="userBuzzword">
+    <button type="submit" onclick="JoinWithBuzzwordButtonClicked()">Join!</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="scripts/cookies.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script>
+        function NewGameButtonClicked() {
             $.ajax({
-            url:"/game/new",
-            type:"POST",
-            data: JSON.stringify({game:$('#games').val()}),
-            contentType:"application/json; charset=utf-8",
-            success: function(result, status){
-                console.log(result);
-                $("body").html(result);
-            },
+                url: "/game/new",
+                type: "POST",
+                data: JSON.stringify({ game: $('#games').val() }),
+                contentType: "application/json; charset=utf-8",
+                success: function (result, status) {
+                    console.log(result);
+                    $("body").html(result);
+                },
             })
         }
         function JoinWithBuzzwordButtonClicked() {
             $.ajax({
-            url:"/game/join",
-            type:"POST",
-            data: JSON.stringify({buzzword:$('#userBuzzword').val()}),
-            contentType:"application/json; charset=utf-8",
-            success: function(result, status){
-                if (result.valid){
-                    setCookie("buzzword", result.buzzword, 1)
-                    $.ajax({
-                    url:"/game/new",
-                    type:"POST",
-                    data: JSON.stringify({game: result.game}),
-                    contentType:"application/json; charset=utf-8",
-                    success: function(result, status){
-                        console.log(result);
-                        $("body").html(result);
-                    },
-                    });
-                } else {
-                    alert(result.buzzword + " is an invalid code");
-                }
-            },
+                url: "/game/join",
+                type: "POST",
+                data: JSON.stringify({ buzzword: $('#userBuzzword').val() }),
+                contentType: "application/json; charset=utf-8",
+                success: function (result, status) {
+                    if (result.valid) {
+                        setCookie("buzzword", result.buzzword, 1)
+                        $.ajax({
+                            url: "/game/new",
+                            type: "POST",
+                            data: JSON.stringify({ game: result.game }),
+                            contentType: "application/json; charset=utf-8",
+                            success: function (result, status) {
+                                console.log(result);
+                                $("body").html(result);
+                            },
+                        });
+                    } else {
+                        alert(result.buzzword + " is an invalid code");
+                    }
+                },
             })
         }
-        $(document).ready(function(){
-        var userId = getCookie("userid")
-        if (userId == ""){
-            userId = newGuid();
-            setCookie("userid", userId, 1);
-        }
+        $(document).ready(function () {
+            var userId = getCookie("userid")
+            if (userId == "") {
+                userId = newGuid();
+                setCookie("userid", userId, 1);
+            }
         });
-        </script>
-    </body>
+    </script>
+</body>
+
 </html>
