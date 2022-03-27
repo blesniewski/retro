@@ -46,7 +46,7 @@
                 data: JSON.stringify({ buzzword: getCookie('buzzword'), category: category }),
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status) {
-                    console.log(result.type);
+                    //console.log(result.type);
                     $("#" + category + 'List').empty();
                     result.forEach(element => {
                         console.log("Element")
@@ -63,7 +63,7 @@
                 data: JSON.stringify({ buzzword: getCookie('buzzword'), category: category, contents: contents, user: getCookie('userid') }),
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status) {
-                    console.log(result);
+                    //console.log(result);
                     $('#' + category + 'Input').val('');
                     refreshCategory(result.category);
                 },
@@ -92,7 +92,7 @@
                 data: JSON.stringify({ game: 'starfish', user: getCookie('userid') }),
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status) {
-                    console.log(result);
+                    //console.log(result);
                     $("#gameBuzzword").text('Your buzzword is: ' + result.buzzword);
                     setCookie("buzzword", result.buzzword, 1)
                 },
@@ -114,5 +114,7 @@
             }, 500);
         });
     //TODO: allow owner do destroy game
+    //TODO: allow users to edit their own entries
+    //TODO: allow users to thumb-up entries (once)
     </script>
 </body>

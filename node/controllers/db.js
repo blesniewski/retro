@@ -17,7 +17,6 @@ const entrySchema = new mongoose.Schema({
     contents: String
 });
 
-//TODO: add entry schema
 const dbUrl = 'mongodb://127.0.0.1:27017'
 const dbName = 'retro'
 
@@ -119,7 +118,7 @@ exports.getNewBuzzword = async function (game, user, callback) {
     // updating the buzzword entry (locking it up) - set current date with added timeout
     console.log(Buzzword.find({ buzzword: pickedBuzzword }));
     var expiry = moment()
-    expiry.add(15, 'm'); //TODO: set this timeout to something like 6h for production
+    expiry.add(30, 'h'); //TODO: set this timeout to something like 6h for production
     Buzzword.findOneAndUpdate({ buzzword: pickedBuzzword }, { buzzword: pickedBuzzword, taken: true, expiryDate: expiry, ownerUser: user, game: game }, { new: true, timestamps: false },
         function (err, updated) {
             if (err) {
@@ -133,13 +132,19 @@ exports.getNewBuzzword = async function (game, user, callback) {
 setInterval(async function () {
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
+    const Entry = mongoose.model('Entry', entrySchema, 'entries');
+
     var now = moment();
-    Buzzword.findOneAndUpdate({ taken: true, expiryDate: { $lte: now } }, { taken: false }, {},
+    Buzzword.findOneAndUpdate({ taken: true, expiryDate: { $lte: now } }, { taken: false, ownerUser: '' }, {},
         function (err, doc) {
             if (doc != null) {
-                console.log('Cleaning the DB: updated: ', doc.buzzword)
+                console.log('Cleaning the DB: updated: ', doc.buzzword);
+                Entry.deleteMany({ buzzword: doc.buzzword }, function (err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
             }
         });
-    //TODO: also clean the entries
 }, 1 * 1000) //TODO: set this timeout to run every minute for production
 // format for the interval would be minutes * seconds * miliseconds
