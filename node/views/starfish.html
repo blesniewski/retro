@@ -1,6 +1,6 @@
 <body>
     <div>Starfish</div>
-    <div class="container-fluid" style="padding: 50px">
+    <div class="container-fluid bg-light" style="padding: 50px; height: 100vh">
         <h4>Your buzzword is: <label class="label label-primary" id="gameBuzzword">Buzzword here</label></h4>
         <div class="row">
             <div id="stopDoingDiv" class="col-md-2 list-group border border-secondary rounded mx-1">
@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="row">
-            <div id="endGameDiv" class="col-md-2 border border-warning mt-5 px-4 py-4 rounded ">
+            <div id="endGameDiv" class="col-md-2 border border-warning mt-5 px-4 py-4 rounded-3 ">
                 <h3><label class="label label-warning" id="endGameLabel">End game</label></h3>
                 <button class="btn btn-danger mx-4 mb-4" type="submit" onclick="endGameBtnClicked()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -124,11 +124,28 @@
                 },
             })
         }
+        function entryDelBtnClicked(event) {
+            console.log(event.currentTarget.parentElement.id);
+            $.ajax({
+                url: "/game/deleteEntry",
+                type: "POST",
+                data: JSON.stringify({
+                    buzzword: getCookie('buzzword'),
+                    entryId: event.currentTarget.parentElement.id,
+                    user: getCookie('userid')
+                }),
+                contentType: "application/json; charset=utf-8",
+            });
+        }
         function refreshCategory(category) {
             $.ajax({
                 url: "/game/getCategoryEntries",
                 type: "POST",
-                data: JSON.stringify({ buzzword: getCookie('buzzword'), category: category }),
+                data: JSON.stringify({
+                    buzzword: getCookie('buzzword'),
+                    category: category,
+                    user: getCookie('userid')
+                }),
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status) {
                     //console.log(result.type);
@@ -136,7 +153,18 @@
                         $("#" + category + 'List').empty();
                         result.entries.forEach(element => {
                             console.log("Element")
-                            $("#" + category + 'List').append('<div class="list-group-item py-1" style="width: 100%" id="' + element.id + '"><p class="text-break mt-2">' + element.contents + '<p></div>');
+                            if (element.madeByUser) {
+                                $("#" + category + 'List').append('<div class="list-group-item py-1 bg-success" style="width: 100%" id="'
+                                    + element.id + '">' + '<p class="text-break mt-2">'
+                                    + element.contents + '</p>'
+                                    + '<button id="' + element.id
+                                    + 'button" class="btn btn-primary" onClick=entryDelBtnClicked(event)>del</button></div>');
+                            } else {
+                                $("#" + category + 'List').append('<div class="list-group-item py-1" style="width: 100%" id="'
+                                    + element.id + '"><p class="text-break mt-2">'
+                                    + element.contents + '</p></div>');
+
+                            }
                         });
                     }
                 },
@@ -150,7 +178,11 @@
             $.ajax({
                 url: "/game/newEntry",
                 type: "POST",
-                data: JSON.stringify({ buzzword: getCookie('buzzword'), category: category, contents: contents, user: getCookie('userid') }),
+                data: JSON.stringify({
+                    buzzword: getCookie('buzzword'),
+                    category: category,
+                    contents: contents, user: getCookie('userid')
+                }),
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status) {
                     //console.log(result);
@@ -188,7 +220,10 @@
             $.ajax({
                 url: "/game/checkIfUserIsOwner",
                 type: "POST",
-                data: JSON.stringify({ buzzword: getCookie("buzzword"), user: getCookie('userid') }),
+                data: JSON.stringify({
+                    buzzword: getCookie("buzzword"),
+                    user: getCookie('userid')
+                }),
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status) {
                     setCookie("isOwner", result.isOwner, 1);
@@ -200,7 +235,10 @@
             $.ajax({
                 url: "/game/requestBuzzword",
                 type: "POST",
-                data: JSON.stringify({ game: 'starfish', user: getCookie('userid') }),
+                data: JSON.stringify({
+                    game: 'starfish',
+                    user: getCookie('userid')
+                }),
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status) {
                     //console.log(result);

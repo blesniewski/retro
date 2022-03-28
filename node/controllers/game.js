@@ -1,3 +1,4 @@
+const { isArrayBufferView } = require('util/types');
 var dbController = require('../controllers/db');
 
 exports.hostNew = function (req, res) {
@@ -44,7 +45,7 @@ exports.getEntriesForCategory = function (req, res) {
         //console.log("isValid: ", isValid);
         if (isValid) {
             //console.log("Buzzword valid, getting entries")
-            dbController.getGameEntriesByCategory(req.body.buzzword, req.body.category, function (entries) {
+            dbController.getGameEntriesByCategory(req.body.buzzword, req.body.category, req.body.user, function (entries) {
                 //console.log("found some entries for :", req.body.buzzword, " and cat: ", req.body.category);
                 res.send({ entries: entries, isGameValid: true });
             })
@@ -54,6 +55,11 @@ exports.getEntriesForCategory = function (req, res) {
             //console.log("Buzzword invalid, sending message");
             res.send({ entries: [], isGameValid: false });
         }
+    });
+}
+exports.deleteEntry = function (req, res) {
+    dbController.removeEntry(req.body.buzzword, req.body.entryId, req.body.user, function (entryRemoved) {
+        res.send({ entryRemoved: entryRemoved });
     });
 }
 exports.endGame = function (req, res) {

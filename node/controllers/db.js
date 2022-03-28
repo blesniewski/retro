@@ -52,7 +52,7 @@ exports.addEntry = async function (author, buzzword, category, contents, callbac
     callback(category);
 }
 
-exports.getGameEntriesByCategory = async function (buzzword, category, callback) {
+exports.getGameEntriesByCategory = async function (buzzword, category, user, callback) {
     await mongoose.connect(dbUrl + '/' + dbName);
     const Entry = mongoose.model('Entry', entrySchema, 'entries');
 
@@ -67,12 +67,37 @@ exports.getGameEntriesByCategory = async function (buzzword, category, callback)
             entries.forEach(entry => {
                 simlpeEntries.push({
                     id: entry.id,
-                    author: entry.author,
                     buzzword: entry.buzzword,
-                    contents: entry.contents
+                    contents: entry.contents,
+                    madeByUser: (entry.author == user)
                 })
             })
             callback(simlpeEntries);
+        });
+}
+
+exports.removeEntry = async function (buzzword, entryId, user, callback) {
+    await mongoose.connect(dbUrl + '/' + dbName);
+    const Entry = mongoose.model('Entry', entrySchema, 'entries');
+
+    Entry.findById(entryId,
+        function (err, entry) {
+            if (err) {
+                console.log("ERR: ", err);
+                callback(false);
+                return;
+            }
+            //console.log("Request to remove entry: ", entry.contents, " from :", user, " entry id: ", entryId)
+            if (entry.author == user) {
+                Entry.deleteOne({ _id: entry._id }, function (err, entry) {
+                    if (err) {
+                        //console.log("ERR: ", err);
+                        callback(false)
+                        return;
+                    }
+                    callback(true);
+                });
+            }
         });
 }
 
