@@ -62,6 +62,12 @@ exports.deleteEntry = function (req, res) {
         res.send({ entryRemoved: entryRemoved });
     });
 }
+exports.editEntry = function (req, res) {
+    //console.log("Request to edit entry: ", req.body.buzzword, req.body.entryId, req.body.user, req.body.contents);
+    dbController.editEntry(req.body.buzzword, req.body.entryId, req.body.user, req.body.contents, function (entryEdited) {
+        res.send({ entryEdited: entryEdited });
+    })
+}
 exports.endGame = function (req, res) {
     //input here would be user ID, and game id, to be validated further
     //console.log("Request to end game: ", req.body.buzzword, " from user: ", req.body.user);

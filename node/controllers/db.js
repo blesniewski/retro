@@ -101,6 +101,31 @@ exports.removeEntry = async function (buzzword, entryId, user, callback) {
         });
 }
 
+exports.editEntry = async function (buzzword, entryId, user, contents, callback) {
+    await mongoose.connect(dbUrl + '/' + dbName);
+    const Entry = mongoose.model('Entry', entrySchema, 'entries');
+
+    Entry.findById(entryId,
+        function (err, entry) {
+            if (err) {
+                console.log("ERR: ", err);
+                callback(false);
+                return;
+            }
+            //console.log("Request to remove entry: ", entry.contents, " from :", user, " entry id: ", entryId)
+            if (entry.author == user) {
+                Entry.findOneAndUpdate({ _id: entry._id }, { contents: contents }, function (err, entry) {
+                    if (err) {
+                        //console.log("ERR: ", err);
+                        callback(false)
+                        return;
+                    }
+                    callback(true);
+                });
+            }
+        });
+}
+
 exports.populateBuzzwords = async function () {
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
@@ -135,7 +160,7 @@ exports.getBuzzword = async function (word, callback) {
 
     var buzzword = await Buzzword.findOne({ buzzword: word });
 
-    console.log('Checking the status for buzzword: ', word);
+    //console.log('Checking the status for buzzword: ', word);
     if (buzzword == null) {
         callback(word, false);
     }

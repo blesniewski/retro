@@ -11,5 +11,6 @@ router.post('/endGame', gameController.endGame);
 router.post('/getIsGameValid', gameController.isGameValid);
 router.post('/checkIfUserIsOwner', gameController.checkIfOwner);
 router.post('/deleteEntry', gameController.deleteEntry);
+router.post('/editEntry', gameController.editEntry);
 
 module.exports = router;
