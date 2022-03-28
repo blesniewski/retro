@@ -1,44 +1,112 @@
 <body>
     <div>Starfish</div>
-    <label id="gameBuzzword">Buzzword here</label>
-    <div id="stopDoingDiv">
-        <label id="stopDoingLabel">Stop doing</label>
-        <ul id="stopDoingList">
-        </ul>
-        <input type="text" id="stopDoingInput">
-        <button type="submit" onclick="stopDoingBtnClicked()">Send</button>
-    </div>
-    <div id="lessOfDiv">
-        <label id="lessOfLabel">Less of</label>
-        <ul id="lessOfList">
-        </ul>
-        <input type="text" id="lessOfInput">
-        <button type="submit" onclick="lessOfBtnClicked()">Send</button>
-    </div>
-    <div id="keepDoingDiv">
-        <label id="keepDoingLabel">Keep doing</label>
-        <ul id="keepDoingList">
-        </ul>
-        <input type="text" id="keepDoingInput">
-        <button type="submit" onclick="keepDoingBtnClicked()">Send</button>
-    </div>
-    <div id="moreOfDiv">
-        <label id="moreOfLabel">More of</label>
-        <ul id="moreOfList">
-        </ul>
-        <input type="text" id="moreOfInput">
-        <button type="submit" onclick="moreOfBtnClicked()">Send</button>
-    </div>
-    <div id="startDoingDiv">
-        <label id="startDoingLabel">Start doing</label>
-        <ul id="startDoingList">
-        </ul>
-        <input type="text" id="startDoingInput">
-        <button type="submit" onclick="startDoingBtnClicked()">Send</button>
-    </div>
-    <div id="endGameDiv">
-        <label id="endGameLabel">You can end your game here:</label>
-        <button type="submit" onclick="endGameBtnClicked()">End!</button>
+    <div class="container-fluid" style="padding: 50px">
+        <h4>Your buzzword is: <label class="label label-primary" id="gameBuzzword">Buzzword here</label></h4>
+        <div class="row">
+            <div id="stopDoingDiv" class="col-md-2 list-group">
+                <h3><label class="label label-primary" id="stopDoingLabel">Stop doing</label></h3>
+                <div class="list-group" id="stopDoingList">
+                </div>
+                <div class="row">
+                    <div class="col-md-8 nopadding">
+                        <input type="text" class="form-control" id="stopDoingInput">
+                    </div>
+                    <div class="col-md-4 nopadding">
+                        <button type="submit" class="form-control btn btn-primary" onclick="stopDoingBtnClicked()"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+            <div id="lessOfDiv" class="col-md-2 list-group">
+                <h3><label class="label label-primary" id="lessOfLabel">Less of</label></h3>
+                <div class="list-group" id="lessOfList">
+                </div>
+                <div class="row">
+                    <div class="col-md-8 nopadding">
+                        <input type="text" class="form-control" id="lessOfInput">
+                    </div>
+                    <div class="col-md-4 nopadding">
+                        <button type="submit" class="form-control btn btn-primary" onclick="lessOfBtnClicked()"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+            <div id="keepDoingDiv" class="col-md-2 list-group">
+                <h3><label class="label label-primary" id="keepDoingLabel">Keep doing</label></h3>
+                <div class="list-group" id="keepDoingList">
+                </div>
+                <div class="row">
+                    <div class="col-md-8 nopadding">
+                        <input type="text" class="form-control" id="keepDoingInput">
+                    </div>
+                    <div class="col-md-4 nopadding">
+                        <button type="submit" class="form-control btn btn-primary" onclick="keepDoingBtnClicked()"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+            <div id="moreOfDiv" class="col-md-2 list-group">
+                <h3><label class="label label-primary" id="moreOfLabel">More of</label></h3>
+                <div class="list-group" id="moreOfList">
+                </div>
+                <div class="row">
+                    <div class="col-md-8 nopadding">
+                        <input type="text" class="form-control" id="moreOfInput">
+                    </div>
+                    <div class="col-md-4 nopadding">
+                        <button type="submit" class="form-control btn btn-primary" onclick="moreOfBtnClicked()"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+            <div id="startDoingDiv" class="col-md-2 list-group">
+                <h3><label class="label label-primary" id="startDoingLabel">Start doing</label></h3>
+                <div class="list-group" id="startDoingList">
+                </div>
+                <div class="row">
+                    <div class="col-md-8 nopadding">
+                        <input type="text" class="form-control" id="startDoingInput">
+                    </div>
+                    <div class="col-md-4 nopadding">
+                        <button type="submit" class="form-control btn btn-primary" onclick="startDoingBtnClicked()"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id=" endGameDiv">
+                <h3><label class="label label-warning" id="endGameLabel">You can end your game here:</label></h3>
+                <button class="btn btn-danger" type="submit" onclick="endGameBtnClicked()"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
+                        <path fill-rule="evenodd"
+                            d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
+                    </svg></button>
+            </div>
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./scripts/cookies.js"></script>
@@ -87,7 +155,7 @@
                         $("#" + category + 'List').empty();
                         result.entries.forEach(element => {
                             console.log("Element")
-                            $("#" + category + 'List').append('<li id="' + element.id + '">' + element.contents + '</li>');
+                            $("#" + category + 'List').append('<div class="list-group-item" id="' + element.id + '">' + element.contents + '</div>');
                         });
                     }
                 },
@@ -123,6 +191,9 @@
         function startDoingBtnClicked() {
             newEntryBtnClicked("startDoing", $("#startDoingInput").val());
         }
+        function setBuzzwordLabel(buzzword) {
+            $("#gameBuzzword").text(buzzword);
+        }
         function requestNewBuzzword() {
             $.ajax({
                 url: "/game/requestBuzzword",
@@ -131,7 +202,7 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status) {
                     //console.log(result);
-                    $("#gameBuzzword").text('Your buzzword is: ' + result.buzzword);
+                    setBuzzwordLabel(result.buzzword);
                     setCookie("buzzword", result.buzzword, 1)
                 },
             })
@@ -142,7 +213,7 @@
                 requestNewBuzzword();
                 setCookie("isOwner", true, 1);
             } else {
-                $("#gameBuzzword").text('Your buzzword is: ' + buzzword);
+                setBuzzwordLabel(buzzword);
             }
             $('#endGameDiv').hide();
             if (getCookie("isOwner") == 'true') {
@@ -159,5 +230,6 @@
         });
     //TODO: allow users to edit their own entries
     //TODO: allow users to thumb-up entries (once)
+    //TODO: make it impossible to post empty entries
     </script>
 </body>
