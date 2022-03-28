@@ -8,5 +8,6 @@ router.post('/join', gameController.joinWithBuzzword);
 router.post('/newEntry', gameController.newEntry);
 router.post('/getCategoryEntries', gameController.getEntriesForCategory);
 router.post('/endGame', gameController.endGame);
+router.post('/getIsGameValid', gameController.isGameValid);
 
 module.exports = router;

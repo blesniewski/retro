@@ -93,7 +93,21 @@ exports.getBuzzword = async function (word, callback) {
 
     var buzzword = await Buzzword.findOne({ buzzword: word });
 
-    //console.log('Checking the status for buzzword: ', word);
+    console.log('Checking the status for buzzword: ', word);
+    if (buzzword == null) {
+        callback(word, false);
+    }
+    else if (buzzword.taken) {
+        callback(word, true, buzzword.game)
+    }
+}
+exports.getBuzzwordisActive = async function (word, callback) {
+    await mongoose.connect(dbUrl + '/' + dbName)
+    const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
+
+    var buzzword = await Buzzword.findOne({ buzzword: word, taken: true });
+
+    console.log('Checking the status for buzzword: ', word);
     if (buzzword == null) {
         callback(word, false);
     }

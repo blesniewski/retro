@@ -27,13 +27,29 @@ exports.newEntry = function (req, res) {
             res.send({ category: category });
         });
 }
+exports.isGameValid = function (req, res) {
+    dbController.getBuzzwordisActive(req.body.buzzword, function (word, isValid, gameType) {
+        console.log("Checking valididity of: ", req.body.buzzword, ", valid: ", isValid);
+        res.send({ isGameValid: isValid });
+    });
+}
 exports.getEntriesForCategory = function (req, res) {
-    //console.log("Getting entries for category ", req.body.category, " and game ", req.body.buzzword);
-    //TODO: check here if game is still in progress, if no inform the user and preferable re-route to the main page
-    dbController.getGameEntriesByCategory(req.body.buzzword, req.body.category, function (entries) {
-        //console.log(entries);
-        res.send(entries);
-    })
+    console.log("Getting entries for category ", req.body.category, " and game ", req.body.buzzword);
+    dbController.getBuzzwordisActive(req.body.buzzword, function (word, isValid, gameType) {
+        console.log("isValid: ", isValid);
+        if (isValid) {
+            console.log("Buzzword valid, getting entries")
+            dbController.getGameEntriesByCategory(req.body.buzzword, req.body.category, function (entries) {
+                console.log("found some entries for :", req.body.buzzword, " and cat: ", req.body.category);
+                res.send({ entries: entries, isGameValid: true });
+            })
+            return;
+        }
+        else {
+            console.log("Buzzword invalid, sending message");
+            res.send({ entries: [], isGameValid: false });
+        }
+    });
 }
 exports.endGame = function (req, res) {
     //input here would be user ID, and game id, to be validated further
@@ -51,4 +67,3 @@ exports.endGame = function (req, res) {
         });
     });
 }
-//TODO: buzzword invalidation

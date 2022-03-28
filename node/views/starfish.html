@@ -43,6 +43,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./scripts/cookies.js"></script>
     <script>
+        function rerouteToMain() {
+            clearInterval(getCookie('intervalId'));
+            setCookie('buzzword', "", -1);
+            setCookie('isOwner', "", -1);
+            setCookie('intervalId', "", -1);
+            alert("Session no longer exists, you will be redirected to the main page now");
+            location.reload();
+        }
+        function checkIfGameValid() {
+            $.ajax({
+                url: "/game/getIsGameValid",
+                type: "POST",
+                data: JSON.stringify({ buzzword: getCookie('buzzword') }),
+                contentType: "application/json; charset=utf-8",
+                success: function (result, status) {
+                    if (!result.isGameValid) {
+                        rerouteToMain();
+                    }
+                },
+            })
+        }
         function endGameBtnClicked() {
             $.ajax({
                 url: "/game/endGame",
@@ -50,7 +71,7 @@
                 data: JSON.stringify({ buzzword: getCookie('buzzword'), user: getCookie('userid') }),
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status) {
-                    console.log(result);
+                    rerouteToMain();
                 },
             })
         }
@@ -62,11 +83,13 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status) {
                     //console.log(result.type);
-                    $("#" + category + 'List').empty();
-                    result.forEach(element => {
-                        console.log("Element")
-                        $("#" + category + 'List').append('<li id="' + element.id + '">' + element.contents + '</li>');
-                    });
+                    if (result.isGameValid) {
+                        $("#" + category + 'List').empty();
+                        result.entries.forEach(element => {
+                            console.log("Element")
+                            $("#" + category + 'List').append('<li id="' + element.id + '">' + element.contents + '</li>');
+                        });
+                    }
                 },
             })
         }
@@ -125,15 +148,15 @@
             if (getCookie("isOwner") == 'true') {
                 $('#endGameDiv').show();
             }
-            setInterval(function () {
+            setCookie("intervalId", setInterval(function () {
                 refreshCategory('stopDoing');
                 refreshCategory('lessOf');
                 refreshCategory('keepDoing');
                 refreshCategory('moreOf');
                 refreshCategory('startDoing');
-            }, 500);
+                checkIfGameValid()
+            }, 1000), 1);
         });
-    //TODO: allow owner do destroy game
     //TODO: allow users to edit their own entries
     //TODO: allow users to thumb-up entries (once)
     </script>
