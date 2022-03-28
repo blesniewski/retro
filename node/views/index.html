@@ -9,18 +9,38 @@
 </head>
 
 <body>
-    <div>Hello world</div>
-    <label>Pick your game</label>
-    <select id="games" name="games">
-        <option value="starfish">Starfish</option>
-        <option value="sailboat">Sailboat</option>
-        <option value="5ls">5Ls</option>
-    </select>
-    <button type="submit" onclick="NewGameButtonClicked()">Host a new game</button>
-    </br>
-    <label>Or join with a code!</label>
-    <input type="text" id="userBuzzword">
-    <button type="submit" onclick="JoinWithBuzzwordButtonClicked()">Join!</button>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Retro tool</h1>
+            <p>
+                Explaination of the retro tool here
+            </p>
+        </div>
+        <div class="col-md-5 justify-content form-group">
+            <h2>Pick your game</h2>
+            <div class="col-md-5">
+                <select id="games" class="form-control" name="games">
+                    <option value="starfish">Starfish</option>
+                    <option value="sailboat">Sailboat</option>
+                    <option value="5ls">5Ls</option>
+                </select>
+            </div>
+            <div class="col-md-5">
+                <button type="submit" class="btn btn-primary form-control" onclick="NewGameButtonClicked()">Host a new
+                    game </button>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2 justify-content form-group">
+            <h2>Or join with a code!</h2>
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="userBuzzword" placeholder="Code">
+            </div>
+            <div class="col-md-5">
+                <button type="submit" class="btn btn-primary form-control"
+                    onclick="JoinWithBuzzwordButtonClicked()">Join!</button>
+            </div>
+        </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="scripts/cookies.js"></script>
     <script src="scripts/utils.js"></script>
