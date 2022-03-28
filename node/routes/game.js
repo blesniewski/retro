@@ -9,5 +9,6 @@ router.post('/newEntry', gameController.newEntry);
 router.post('/getCategoryEntries', gameController.getEntriesForCategory);
 router.post('/endGame', gameController.endGame);
 router.post('/getIsGameValid', gameController.isGameValid);
+router.post('/checkIfUserIsOwner', gameController.checkIfOwner);
 
 module.exports = router;

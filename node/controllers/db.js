@@ -87,6 +87,23 @@ exports.populateBuzzwords = async function () {
         await buzzword.save();
     })
 }
+exports.checkIfBuzzwordOwner = async function (word, user, callback) {
+    await mongoose.connect(dbUrl + '/' + dbName)
+    const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
+
+    //console.log("Trying to find buzzword: ", word);
+    var buzzword = await Buzzword.findOne({ buzzword: word });
+    //console.log("Checking if User: ", user, " is owner of: ", word, " owner is: ", buzzword.ownerUser);
+    if (buzzword == null) {
+        callback(false);
+        return;
+    }
+    if (buzzword.taken && buzzword.ownerUser == user) {
+        callback(true);
+        return;
+    }
+    callback(false);
+}
 exports.getBuzzword = async function (word, callback) {
     await mongoose.connect(dbUrl + '/' + dbName)
     const Buzzword = mongoose.model('Buzzword', buzzwordSchema, 'buzzwords');
@@ -107,7 +124,7 @@ exports.getBuzzwordisActive = async function (word, callback) {
 
     var buzzword = await Buzzword.findOne({ buzzword: word, taken: true });
 
-    console.log('Checking the status for buzzword: ', word);
+    //console.log('Checking the status for buzzword: ', word);
     if (buzzword == null) {
         callback(word, false);
     }
@@ -149,13 +166,13 @@ exports.invalidateBuzzword = async function (user, buzzword, callback) {
         callback(false);
         return;
     }
-    console.log("user confirmed to be owner")
+    //console.log("user confirmed to be owner")
     Buzzword.findOneAndUpdate({ buzzword: buzzword }, { taken: false, ownerUser: '' }, {},
         function (err, doc) {
             if (err) {
                 console.log("ERR: ", err);
             }
-            console.log("query callback run, trying to find buzzword: ", buzzword, " From user: ", user);
+            //console.log("query callback run, trying to find buzzword: ", buzzword, " From user: ", user);
             if (doc != null) {
                 console.log('Cleaning the DB: updated: ', doc.buzzword);
                 Entry.deleteMany({ buzzword: doc.buzzword }, function (err) {

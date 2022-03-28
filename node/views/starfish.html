@@ -3,108 +3,89 @@
     <div class="container-fluid" style="padding: 50px">
         <h4>Your buzzword is: <label class="label label-primary" id="gameBuzzword">Buzzword here</label></h4>
         <div class="row">
-            <div id="stopDoingDiv" class="col-md-2 list-group">
-                <h3><label class="label label-primary" id="stopDoingLabel">Stop doing</label></h3>
-                <div class="list-group" id="stopDoingList">
+            <div id="stopDoingDiv" class="col-md-2 list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="stopDoingLabel">Stop doing</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="stopDoingList">
                 </div>
-                <div class="row">
-                    <div class="col-md-8 nopadding">
-                        <input type="text" class="form-control" id="stopDoingInput">
-                    </div>
-                    <div class="col-md-4 nopadding">
-                        <button type="submit" class="form-control btn btn-primary" onclick="stopDoingBtnClicked()"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-check-lg" viewBox="0 0 16 16">
-                                <path
-                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
-                            </svg></button>
-                    </div>
+                <div class="hstack gap-2 px-3 py-3">
+                    <input type="text" class="form-control  me-auto" id="stopDoingInput">
+                    <button type="submit" class="btn btn-primary" onclick="stopDoingBtnClicked()"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path
+                                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                        </svg></button>
                 </div>
             </div>
-            <div id="lessOfDiv" class="col-md-2 list-group">
-                <h3><label class="label label-primary" id="lessOfLabel">Less of</label></h3>
-                <div class="list-group" id="lessOfList">
+            <div id="lessOfDiv" class="col-md-2 list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="lessOfLabel">Less of</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="lessOfList">
                 </div>
-                <div class="row">
-                    <div class="col-md-8 nopadding">
-                        <input type="text" class="form-control" id="lessOfInput">
-                    </div>
-                    <div class="col-md-4 nopadding">
-                        <button type="submit" class="form-control btn btn-primary" onclick="lessOfBtnClicked()"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-check-lg" viewBox="0 0 16 16">
-                                <path
-                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
-                            </svg></button>
-                    </div>
+                <div class="hstack gap-2 px-3 py-3">
+                    <input type="text" class="form-control  me-auto" id="lessOfInput">
+                    <button type="submit" class="btn btn-primary" onclick="lessOfBtnClicked()"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path
+                                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                        </svg></button>
                 </div>
             </div>
-            <div id="keepDoingDiv" class="col-md-2 list-group">
-                <h3><label class="label label-primary" id="keepDoingLabel">Keep doing</label></h3>
-                <div class="list-group" id="keepDoingList">
+            <div id="keepDoingDiv" class="col-md-2 list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="keepDoingLabel">Keep doing</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="keepDoingList">
                 </div>
-                <div class="row">
-                    <div class="col-md-8 nopadding">
-                        <input type="text" class="form-control" id="keepDoingInput">
-                    </div>
-                    <div class="col-md-4 nopadding">
-                        <button type="submit" class="form-control btn btn-primary" onclick="keepDoingBtnClicked()"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-check-lg" viewBox="0 0 16 16">
-                                <path
-                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
-                            </svg></button>
-                    </div>
+                <div class="hstack gap-2 px-3">
+                    <input type="text" class="form-control  me-auto" id="keepDoingInput">
+                    <button type="submit" class="btn btn-primary" onclick="keepDoingBtnClicked()"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path
+                                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                        </svg></button>
                 </div>
             </div>
-            <div id="moreOfDiv" class="col-md-2 list-group">
-                <h3><label class="label label-primary" id="moreOfLabel">More of</label></h3>
-                <div class="list-group" id="moreOfList">
+            <div id="moreOfDiv" class="col-md-2 list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="moreOfLabel">More of</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="moreOfList">
                 </div>
-                <div class="row">
-                    <div class="col-md-8 nopadding">
-                        <input type="text" class="form-control" id="moreOfInput">
-                    </div>
-                    <div class="col-md-4 nopadding">
-                        <button type="submit" class="form-control btn btn-primary" onclick="moreOfBtnClicked()"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-check-lg" viewBox="0 0 16 16">
-                                <path
-                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
-                            </svg></button>
-                    </div>
+                <div class="hstack gap-2 px-3 py-3">
+                    <input type="text" class="form-control  me-auto" id="moreOfInput">
+                    <button type="submit" class="btn btn-primary" onclick="moreOfBtnClicked()"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path
+                                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                        </svg></button>
                 </div>
             </div>
-            <div id="startDoingDiv" class="col-md-2 list-group">
-                <h3><label class="label label-primary" id="startDoingLabel">Start doing</label></h3>
-                <div class="list-group" id="startDoingList">
+            <div id="startDoingDiv" class="col-md-2 list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="startDoingLabel">Start doing</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="startDoingList">
                 </div>
-                <div class="row">
-                    <div class="col-md-8 nopadding">
-                        <input type="text" class="form-control" id="startDoingInput">
-                    </div>
-                    <div class="col-md-4 nopadding">
-                        <button type="submit" class="form-control btn btn-primary" onclick="startDoingBtnClicked()"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-check-lg" viewBox="0 0 16 16">
-                                <path
-                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
-                            </svg></button>
-                    </div>
+                <div class="hstack gap-2 px-3 py-3">
+                    <input type="text" class="form-control  me-auto" id="startDoingInput">
+                    <button type="submit" class="btn btn-primary" onclick="startDoingBtnClicked()"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path
+                                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                        </svg></button>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div id=" endGameDiv">
-                <h3><label class="label label-warning" id="endGameLabel">You can end your game here:</label></h3>
-                <button class="btn btn-danger" type="submit" onclick="endGameBtnClicked()"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
-                        viewBox="0 0 16 16">
+            <div id="endGameDiv" class="col-md-2 border border-warning mt-5 px-4 py-4 rounded ">
+                <h3><label class="label label-warning" id="endGameLabel">End game</label></h3>
+                <button class="btn btn-danger mx-4 mb-4" type="submit" onclick="endGameBtnClicked()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-x-lg" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
                             d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
                         <path fill-rule="evenodd"
                             d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
-                    </svg></button>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
@@ -155,7 +136,7 @@
                         $("#" + category + 'List').empty();
                         result.entries.forEach(element => {
                             console.log("Element")
-                            $("#" + category + 'List').append('<div class="list-group-item" id="' + element.id + '">' + element.contents + '</div>');
+                            $("#" + category + 'List').append('<div class="list-group-item py-1" style="width: 100%" id="' + element.id + '"><p class="text-break mt-2">' + element.contents + '<p></div>');
                         });
                     }
                 },
@@ -163,6 +144,9 @@
         }
 
         function newEntryBtnClicked(category, contents) {
+            if (contents == '') {
+                return;
+            }
             $.ajax({
                 url: "/game/newEntry",
                 type: "POST",
@@ -194,6 +178,24 @@
         function setBuzzwordLabel(buzzword) {
             $("#gameBuzzword").text(buzzword);
         }
+        function refreshAdminPanel() {
+            $('#endGameDiv').hide();
+            if (getCookie("isOwner") == 'true') {
+                $('#endGameDiv').show();
+            }
+        }
+        function checkIfUserIsOwner() {
+            $.ajax({
+                url: "/game/checkIfUserIsOwner",
+                type: "POST",
+                data: JSON.stringify({ buzzword: getCookie("buzzword"), user: getCookie('userid') }),
+                contentType: "application/json; charset=utf-8",
+                success: function (result, status) {
+                    setCookie("isOwner", result.isOwner, 1);
+                    refreshAdminPanel();
+                },
+            });
+        }
         function requestNewBuzzword() {
             $.ajax({
                 url: "/game/requestBuzzword",
@@ -204,21 +206,22 @@
                     //console.log(result);
                     setBuzzwordLabel(result.buzzword);
                     setCookie("buzzword", result.buzzword, 1)
+                    checkIfUserIsOwner();
                 },
             })
+        }
+        async function configureOwner() {
+            requestNewBuzzword();
         }
         $(document).ready(function () {
             var buzzword = getCookie("buzzword")
             if (buzzword == "") {
                 requestNewBuzzword();
-                setCookie("isOwner", true, 1);
             } else {
                 setBuzzwordLabel(buzzword);
+                checkIfUserIsOwner();
             }
             $('#endGameDiv').hide();
-            if (getCookie("isOwner") == 'true') {
-                $('#endGameDiv').show();
-            }
             setCookie("intervalId", setInterval(function () {
                 refreshCategory('stopDoing');
                 refreshCategory('lessOf');
@@ -228,8 +231,7 @@
                 checkIfGameValid()
             }, 1000), 1);
         });
-    //TODO: allow users to edit their own entries
+    //TODO: allow users to edit/delete their own entries
     //TODO: allow users to thumb-up entries (once)
-    //TODO: make it impossible to post empty entries
     </script>
 </body>
