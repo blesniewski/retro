@@ -13,8 +13,8 @@ app.use(express.json());
 app.use('/', indexRouter);
 app.use('/game', gameRouter);
 
-
-var listener = app.listen(8081, function () {
+const port = 8080
+var listener = app.listen(8080, function () {
     console.log('Listening on port ' + listener.address().port);
     dbController.clearBuzzwords();
     dbController.clearEntries();
