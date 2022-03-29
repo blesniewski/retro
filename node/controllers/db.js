@@ -17,7 +17,7 @@ const entrySchema = new mongoose.Schema({
     contents: String
 });
 
-const dbUrl = 'mongodb://retro-mongo-1:27017'
+const dbUrl = 'mongodb://mongo:27017'
 const dbName = 'retro'
 
 exports.clearEntries = async function () {
