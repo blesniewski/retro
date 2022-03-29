@@ -88,6 +88,10 @@ exports.removeEntry = async function (buzzword, entryId, user, callback) {
                 return;
             }
             //console.log("Request to remove entry: ", entry.contents, " from :", user, " entry id: ", entryId)
+            if (entry == null) {
+                callback(false);
+                return;
+            }
             if (entry.author == user) {
                 Entry.deleteOne({ _id: entry._id }, function (err, entry) {
                     if (err) {
@@ -201,8 +205,6 @@ exports.getNewBuzzword = async function (game, user, callback) {
         function (err, updated) {
             if (err) {
                 console.log(err);
-            } else {
-                console.log(updated);
             }
         });
 }
@@ -224,7 +226,7 @@ exports.invalidateBuzzword = async function (user, buzzword, callback) {
             }
             //console.log("query callback run, trying to find buzzword: ", buzzword, " From user: ", user);
             if (doc != null) {
-                console.log('Cleaning the DB: updated: ', doc.buzzword);
+                //console.log('Cleaning the DB: updated: ', doc.buzzword);
                 Entry.deleteMany({ buzzword: doc.buzzword }, function (err) {
                     if (err) {
                         console.log(err);

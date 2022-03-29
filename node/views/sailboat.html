@@ -2,11 +2,11 @@
     <div class="container-fluid mx-auto justify-content-center w-75" style="height: 100vh">
         <div class="container-fluid my-5">
             <div class="row">
-                <div class="col-md-3 mx-2">
-                    <img src="./images/starfish.png" class="img-fluid" alt="Responsive image">
+                <div class="col-md-4 mx-2">
+                    <img src="./images/sailboat.png" class="img-fluid" alt="Responsive image">
                 </div>
                 <div class="col">
-                    <h1 class="display-5 fw-bold">Starfish retrospective</h1>
+                    <h1 class="display-5 fw-bold">Sailboat retrospective</h1>
                     <h4 class="py-4">Code for joining:
                         <label class="label label-primary" id="gameBuzzword">Buzzword here</label>
                     </h4>
@@ -14,13 +14,13 @@
             </div>
         </div>
         <div class="row">
-            <div id="stopDoingDiv" class="col-md-2 bg-light list-group border border-secondary rounded mx-1">
-                <h3><label class="label label-primary px-3 py-2 mt-2" id="stopDoingLabel">Stop doing</label></h3>
-                <div class="list-group px-3 py-2 w-100" id="stopDoingList">
+            <div id="anchorDiv" class="col-md-3 bg-light list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="anchorLabel">Anchors</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="anchorList">
                 </div>
                 <div class="hstack gap-2 mx-1 py-3">
-                    <input type="text" class="form-control  me-auto" id="stopDoingInput">
-                    <button type="submit" class="btn btn-primary" onclick="stopDoingBtnClicked()"><svg
+                    <input type="text" class="form-control  me-auto" id="anchorInput">
+                    <button type="submit" class="btn btn-primary" onclick="anchorBtnClicked()"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path
@@ -28,13 +28,13 @@
                         </svg></button>
                 </div>
             </div>
-            <div id="lessOfDiv" class="col-md-2 bg-light list-group border border-secondary rounded mx-1">
-                <h3><label class="label label-primary px-3 py-2 mt-2" id="lessOfLabel">Less of</label></h3>
-                <div class="list-group px-3 py-2 w-100" id="lessOfList">
+            <div id="rocksDiv" class="col-md-3 bg-light list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="rocksLabel">Rocks</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="rocksList">
                 </div>
                 <div class="hstack gap-2 px-3 py-3">
-                    <input type="text" class="form-control  me-auto" id="lessOfInput">
-                    <button type="submit" class="btn btn-primary" onclick="lessOfBtnClicked()"><svg
+                    <input type="text" class="form-control  me-auto" id="rocksInput">
+                    <button type="submit" class="btn btn-primary" onclick="rocksBtnClicked()"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path
@@ -42,13 +42,13 @@
                         </svg></button>
                 </div>
             </div>
-            <div id="keepDoingDiv" class="col-md-2 bg-light list-group border border-secondary rounded mx-1">
-                <h3><label class="label label-primary px-3 py-2 mt-2" id="keepDoingLabel">Keep doing</label></h3>
-                <div class="list-group px-3 py-2 w-100" id="keepDoingList">
+            <div id="windDiv" class="col-md-3 bg-light list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="windLabel">Wind</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="windList">
                 </div>
                 <div class="hstack gap-2 px-3 py-3">
-                    <input type="text" class="form-control  me-auto" id="keepDoingInput">
-                    <button type="submit" class="btn btn-primary" onclick="keepDoingBtnClicked()"><svg
+                    <input type="text" class="form-control  me-auto" id="windInput">
+                    <button type="submit" class="btn btn-primary" onclick="windBtnClicked()"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path
@@ -56,27 +56,13 @@
                         </svg></button>
                 </div>
             </div>
-            <div id="moreOfDiv" class="col-md-2 bg-light list-group border border-secondary rounded mx-1">
-                <h3><label class="label label-primary px-3 py-2 mt-2" id="moreOfLabel">More of</label></h3>
-                <div class="list-group px-3 py-2 w-100" id="moreOfList">
+            <div id="goalDiv" class="col bg-light list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="goalLabel">Goal</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="goalList">
                 </div>
                 <div class="hstack gap-2 px-3 py-3">
-                    <input type="text" class="form-control  me-auto" id="moreOfInput">
-                    <button type="submit" class="btn btn-primary" onclick="moreOfBtnClicked()"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-check-lg" viewBox="0 0 16 16">
-                            <path
-                                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
-                        </svg></button>
-                </div>
-            </div>
-            <div id="startDoingDiv" class="col-md-2 bg-light list-group border border-secondary rounded mx-1">
-                <h3><label class="label label-primary px-3 py-2 mt-2" id="startDoingLabel">Start doing</label></h3>
-                <div class="list-group px-3 py-2 w-100" id="startDoingList">
-                </div>
-                <div class="hstack gap-2 px-3 py-3">
-                    <input type="text" class="form-control  me-auto" id="startDoingInput">
-                    <button type="submit" class="btn btn-primary" onclick="startDoingBtnClicked()"><svg
+                    <input type="text" class="form-control  me-auto" id="goalInput">
+                    <button type="submit" class="btn btn-primary" onclick="goalBtnClicked()"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path
@@ -129,24 +115,23 @@
         crossorigin="anonymous"></script>
     <script src="./scripts/cookies.js"></script>
     <script>
-        function stopDoingBtnClicked() {
-            newEntryBtnClicked("stopDoing", $("#stopDoingInput").val());
+        function anchorBtnClicked() {
+            newEntryBtnClicked("anchor", $("#anchorInput").val());
         }
-        function lessOfBtnClicked() {
-            newEntryBtnClicked("lessOf", $("#lessOfInput").val());
+        function rocksBtnClicked() {
+            newEntryBtnClicked("rocks", $("#rocksInput").val());
         }
-        function keepDoingBtnClicked() {
-            newEntryBtnClicked("keepDoing", $("#keepDoingInput").val());
+        function windBtnClicked() {
+            newEntryBtnClicked("wind", $("#windInput").val());
         }
-        function moreOfBtnClicked() {
-            newEntryBtnClicked("moreOf", $("#moreOfInput").val());
+        function goalBtnClicked() {
+            newEntryBtnClicked("goal", $("#goalInput").val());
         }
         function startDoingBtnClicked() {
             newEntryBtnClicked("startDoing", $("#startDoingInput").val());
         }
-
         $(document).ready(function () {
-            var gameType = setCookie("gameType", "starfish", 1);
+            var gameType = setCookie("gameType", "sailboat", 1);
             var buzzword = getCookie("buzzword")
             if (buzzword == "") {
                 requestNewBuzzword();
@@ -156,10 +141,10 @@
             }
             $('#endGameDiv').hide();
             setCookie("intervalId", setInterval(function () {
-                refreshCategory('stopDoing');
-                refreshCategory('lessOf');
-                refreshCategory('keepDoing');
-                refreshCategory('moreOf');
+                refreshCategory('anchor');
+                refreshCategory('rocks');
+                refreshCategory('wind');
+                refreshCategory('goal');
                 refreshCategory('startDoing');
                 checkIfGameValid()
             }, 1000), 1);

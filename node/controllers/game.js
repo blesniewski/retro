@@ -2,7 +2,7 @@ const { isArrayBufferView } = require('util/types');
 var dbController = require('../controllers/db');
 
 exports.hostNew = function (req, res) {
-    console.log('hosting new game')
+    //console.log('hosting new game')
     var path = require('path')
 
     const gameHTML = req.body.game + '.html'
