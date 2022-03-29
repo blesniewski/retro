@@ -6,7 +6,7 @@ exports.hostNew = function (req, res) {
     var path = require('path')
 
     const gameHTML = req.body.game + '.html'
-    //console.log(gameHTML)
+    console.log(gameHTML)
     res.sendFile(gameHTML, { root: path.join(__dirname, '../views/') })
 }
 exports.getNewBuzzword = function (req, res) {

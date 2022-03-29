@@ -1,12 +1,12 @@
 <body>
     <div class="container-fluid mx-auto justify-content-center w-75" style="height: 100vh">
-        <div class="container-fluid my-6">
+        <div class="container-fluid my-5">
             <div class="row">
                 <div class="col-md-4 mx-2">
-                    <img src="./images/sailboat.png" class="img-fluid" alt="Responsive image">
+                    <h1 class="display-1">5Ls</h1>
                 </div>
                 <div class="col">
-                    <h1 class="display-5 fw-bold">Sailboat retrospective</h1>
+                    <h1 class="display-5 fw-bold">5Ls retrospective</h1>
                     <h4 class="py-4">Code for joining:
                         <label class="label label-primary" id="gameBuzzword">Buzzword here</label>
                     </h4>
@@ -14,13 +14,13 @@
             </div>
         </div>
         <div class="row">
-            <div id="anchorDiv" class="col-md-3 bg-light list-group border border-secondary rounded mx-1">
-                <h3><label class="label label-primary px-3 py-2 mt-2" id="anchorLabel">Anchors</label></h3>
-                <div class="list-group px-3 py-2 w-100" id="anchorList">
+            <div id="loathedDiv" class="col-md-2 bg-light list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="loathedLabel">Loathed</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="loathedList">
                 </div>
                 <div class="hstack gap-2 mx-1 py-3">
-                    <input type="text" class="form-control  me-auto" id="anchorInput">
-                    <button type="submit" class="btn btn-primary" onclick="anchorBtnClicked()"><svg
+                    <input type="text" class="form-control  me-auto" id="loathedInput">
+                    <button type="submit" class="btn btn-primary" onclick="loathedBtnClicked()"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path
@@ -28,13 +28,13 @@
                         </svg></button>
                 </div>
             </div>
-            <div id="rocksDiv" class="col-md-3 bg-light list-group border border-secondary rounded mx-1">
-                <h3><label class="label label-primary px-3 py-2 mt-2" id="rocksLabel">Rocks</label></h3>
-                <div class="list-group px-3 py-2 w-100" id="rocksList">
+            <div id="longedForDiv" class="col-md-2 bg-light list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="longedForLabel">Longed for</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="longedForList">
                 </div>
                 <div class="hstack gap-2 px-3 py-3">
-                    <input type="text" class="form-control  me-auto" id="rocksInput">
-                    <button type="submit" class="btn btn-primary" onclick="rocksBtnClicked()"><svg
+                    <input type="text" class="form-control  me-auto" id="longedForInput">
+                    <button type="submit" class="btn btn-primary" onclick="longedForBtnClicked()"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path
@@ -42,13 +42,13 @@
                         </svg></button>
                 </div>
             </div>
-            <div id="windDiv" class="col-md-3 bg-light list-group border border-secondary rounded mx-1">
-                <h3><label class="label label-primary px-3 py-2 mt-2" id="windLabel">Wind</label></h3>
-                <div class="list-group px-3 py-2 w-100" id="windList">
+            <div id="lackedDiv" class="col-md-2 bg-light list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="lackedLabel">Lacked</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="lackedList">
                 </div>
                 <div class="hstack gap-2 px-3 py-3">
-                    <input type="text" class="form-control  me-auto" id="windInput">
-                    <button type="submit" class="btn btn-primary" onclick="windBtnClicked()"><svg
+                    <input type="text" class="form-control  me-auto" id="lackedInput">
+                    <button type="submit" class="btn btn-primary" onclick="lackedBtnClicked()"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path
@@ -56,13 +56,27 @@
                         </svg></button>
                 </div>
             </div>
-            <div id="goalDiv" class="col bg-light list-group border border-secondary rounded mx-1">
-                <h3><label class="label label-primary px-3 py-2 mt-2" id="goalLabel">Goal</label></h3>
-                <div class="list-group px-3 py-2 w-100" id="goalList">
+            <div id="learnedDiv" class="col-md-2 bg-light list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="learnedLabel">Learned</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="learnedList">
                 </div>
                 <div class="hstack gap-2 px-3 py-3">
-                    <input type="text" class="form-control  me-auto" id="goalInput">
-                    <button type="submit" class="btn btn-primary" onclick="goalBtnClicked()"><svg
+                    <input type="text" class="form-control  me-auto" id="learnedInput">
+                    <button type="submit" class="btn btn-primary" onclick="learnedBtnClicked()"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path
+                                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                        </svg></button>
+                </div>
+            </div>
+            <div id="likedDiv" class="col bg-light list-group border border-secondary rounded mx-1">
+                <h3><label class="label label-primary px-3 py-2 mt-2" id="likedLabel">Liked</label></h3>
+                <div class="list-group px-3 py-2 w-100" id="likedList">
+                </div>
+                <div class="hstack gap-2 px-3 py-3">
+                    <input type="text" class="form-control  me-auto" id="likedInput">
+                    <button type="submit" class="btn btn-primary" onclick="likedBtnClicked()"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path
@@ -71,20 +85,21 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div id="endGameDiv" class="col-md-2 bg-light border border-warning mt-5 px-4 py-4 rounded-3 ">
-                <h3><label class="label label-warning" id="endGameLabel">End game</label></h3>
-                <button class="btn btn-danger mx-4 mb-4" type="submit" onclick="endGameBtnClicked()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-x-lg" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
-                        <path fill-rule="evenodd"
-                            d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
-                    </svg>
-                </button>
-            </div>
+    </div>
+    <div class="row">
+        <div id="endGameDiv" class="col-md-2 bg-light border border-warning mt-5 px-4 py-4 rounded-3 ">
+            <h3><label class="label label-warning" id="endGameLabel">End game</label></h3>
+            <button class="btn btn-danger mx-4 mb-4" type="submit" onclick="endGameBtnClicked()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
+                    <path fill-rule="evenodd"
+                        d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
+                </svg>
+            </button>
         </div>
+    </div>
     </div>
     <!-- Modal code based on: https://getbootstrap.com/docs/5.1/components/modal/ -->
     <div class="modal fade" id="entryEditModal" tabindex="-1" aria-labelledby="entryEditModalLabel" aria-hidden="true">
@@ -115,20 +130,23 @@
         crossorigin="anonymous"></script>
     <script src="./scripts/cookies.js"></script>
     <script>
-        function anchorBtnClicked() {
-            newEntryBtnClicked("anchor", $("#anchorInput").val());
+        function loathedBtnClicked() {
+            newEntryBtnClicked("loathed", $("#loathedInput").val());
         }
-        function rocksBtnClicked() {
-            newEntryBtnClicked("rocks", $("#rocksInput").val());
+        function longedForBtnClicked() {
+            newEntryBtnClicked("longedFor", $("#longedForInput").val());
         }
-        function windBtnClicked() {
-            newEntryBtnClicked("wind", $("#windInput").val());
+        function lackedBtnClicked() {
+            newEntryBtnClicked("lacked", $("#lackedInput").val());
         }
-        function goalBtnClicked() {
-            newEntryBtnClicked("goal", $("#goalInput").val());
+        function learnedBtnClicked() {
+            newEntryBtnClicked("learned", $("#learnedInput").val());
+        }
+        function likedBtnClicked() {
+            newEntryBtnClicked("liked", $("#likedInput").val());
         }
         $(document).ready(function () {
-            var gameType = setCookie("gameType", "sailboat", 1);
+            var gameType = setCookie("gameType", "5Ls", 1);
             var buzzword = getCookie("buzzword")
             if (buzzword == "") {
                 requestNewBuzzword();
@@ -138,10 +156,11 @@
             }
             $('#endGameDiv').hide();
             setCookie("intervalId", setInterval(function () {
-                refreshCategory('anchor');
-                refreshCategory('rocks');
-                refreshCategory('wind');
-                refreshCategory('goal');
+                refreshCategory('loathed');
+                refreshCategory('longedFor');
+                refreshCategory('lacked');
+                refreshCategory('learned');
+                refreshCategory('liked');
                 checkIfGameValid()
             }, 1000), 1);
         });

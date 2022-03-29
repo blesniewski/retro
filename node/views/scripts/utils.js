@@ -13,6 +13,7 @@ function rerouteToMain() {
     setCookie('buzzword', "", -1);
     setCookie('isOwner', "", -1);
     setCookie('intervalId', "", -1);
+    setCookie('gameType', "", -1);
     alert("Session no longer exists, you will be redirected to the main page now");
     location.reload();
 }
